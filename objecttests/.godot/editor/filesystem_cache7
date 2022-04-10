@@ -1,0 +1,8 @@
+102b54792f6b2ef812636a2bdaeb9d34
+::res://::1649630630
+icon.png::CompressedTexture2D::61823510659126929::1649627887::1649627936::1::::<><>::
+testingscene.tscn::PackedScene::2465277956069709815::1649630685::0::1::::<><>::res://objects/PlayerParkour2D.gd<>uid://47hvfqsdp74<>res://objects/bouncePad.gd
+::res://objects/::1649630630
+ObjectBase2D.gd::GDScript::-1::1649630630::0::1::::ObjectBase2D<>CharacterBody2D<>::
+PlayerParkour2D.gd::GDScript::-1::1649629136::0::1::::PlayerParkour2D<>ObjectBase2D<>::
+bouncePad.gd::GDScript::-1::1649630358::0::1::::bouncePad<>Node2D<>::

@@ -1,0 +1,6 @@
+res://objects/ObjectBase2D.gd
+res://objects/PlayerParkour2D.gd
+res://objects/bouncePad.gd
+res://objects/bouncePad2D.gd
+res://objects/prkplayer.gd
+res://testingscene.tscn

@@ -10,12 +10,24 @@ config_version=5
 
 _global_script_classes=[{
 "base": "CharacterBody2D",
+"class": &"ObjectBase2D",
+"language": &"GDScript",
+"path": "res://objects/ObjectBase2D.gd"
+}, {
+"base": "ObjectBase2D",
 "class": &"PlayerParkour2D",
 "language": &"GDScript",
-"path": "res://objects/prkplayer.gd"
+"path": "res://objects/PlayerParkour2D.gd"
+}, {
+"base": "Node2D",
+"class": &"bouncePad2D",
+"language": &"GDScript",
+"path": "res://objects/bouncePad2D.gd"
 }]
 _global_script_class_icons={
-"PlayerParkour2D": ""
+"ObjectBase2D": "",
+"PlayerParkour2D": "",
+"bouncePad2D": ""
 }
 
 [application]

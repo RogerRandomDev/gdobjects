@@ -1,14 +1,12 @@
-extends CharacterBody2D
+extends ObjectBase2D
 class_name PlayerParkour2D
-
 #lotsa variables for this bastard
-@export var Gravity:int=160
 @export var jumpForce:int=128
 
 @export var moveSpeed:int=128
 @export var accelRate:float=2.5
 @export var decelRate:float=1.5
-@export var friction:float=5.0
+
 @export var maxJumps:int=1
 @export var wallJump:bool=false
 @export var wallJumpForce:Vector2=Vector2(256,128)
@@ -22,6 +20,9 @@ var canJump=true
 
 var doCling=false
 var totalCling=0.0
+#this one just helps to check which direction you last went in
+var lastdir=Vector2.ZERO
+
 @export var jumpForgivenessTime:float=0.125
 func _ready():
 	makeTimer("jumpForgivenessTimer",jumpForgivenessTime,nojumps)
@@ -34,26 +35,27 @@ func makeTimer(namee,duration,fn):
 	t.connect("timeout",fn)
 
 func _physics_process(delta):
+	
 	var state=statelist.keys()[current_state]
 	if has_method(state):
 		call(state,delta)
 	move_and_slide()
 func Base(delta):
+	super._physics_process(delta)
 	var movedir=getInputMotion()
 	#deals with the check for if on floor
 	if is_on_floor():
-		velocity.y=0
 		cur_jump_count=-1
 		wallJumped=false
 		canJump=true
 		totalCling=0.0
+		movedir.x*=friction
 		#this stops the timer for extra jump time after leaving edge
 		if get_node("jumpForgivenessTimer").time_left!=0:get_node("jumpForgivenessTimer").stop()
 	else:
 		#this starts the timer for extra jump time after leaving edge
 		if canJump&&get_node("jumpForgivenessTimer").time_left==0:get_node("jumpForgivenessTimer").start()
-		velocity.y+=Gravity*delta
-	
+	if abs(velocity.x)>=16:lastdir.x=velocity.x
 	#sets wallJumped to false when the movement direction is the same as current direction
 	##can be used to climb walls, but that would be pretty neat as a feature
 	#allows you to have more air control again
@@ -67,13 +69,9 @@ func Base(delta):
 			velocity.x+=movedir.x*delta*(accelRate+decelRate)*moveSpeed
 		else:
 			velocity.x+=movedir.x*delta*accelRate*moveSpeed
-	else:
-		if canJump:
-			velocity.x-=velocity.x*delta*decelRate*friction
-		velocity.x-=velocity.x*delta*decelRate
 	#jumping
 	if(movedir.y!=0):
-		var wall_jump=get_wall_normals()
+		var wall_jump=get_wall_normals(delta)
 		#default jump, then wall jump check
 		if(canJump||(cur_jump_count<maxJumps&&(wall_jump.x==0||!wallJump))):
 			cur_jump_count+=1
@@ -84,7 +82,7 @@ func Base(delta):
 			velocity= wallJumpForce*Vector2(wall_jump.x,-1)
 			wallJumped=true
 	#wall clinging
-	if Input.is_action_just_pressed("shift")&&is_on_wall():
+	if Input.is_action_just_pressed("shift")&&wallCling&&get_wall_normals(delta)!=Vector2.ZERO:
 		doCling=true
 	if Input.is_action_just_released("shift"):
 		doCling=false
@@ -94,8 +92,12 @@ func Base(delta):
 		velocity=Vector2.ZERO
 
 #returns normal values for the wall slide collision
-func get_wall_normals():
+func get_wall_normals(delta:float=0.):
+	var storedvel=velocity;var lpos=position
+	velocity.x=lastdir.x
+	move_and_slide()
 	var count: = get_slide_collision_count()
+	velocity=storedvel;position=lpos
 	if count != 0:
 		for slide in count:
 			var norm= get_slide_collision( slide ).get_normal()
