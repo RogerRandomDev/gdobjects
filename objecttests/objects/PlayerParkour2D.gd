@@ -24,7 +24,9 @@ var totalCling=0.0
 var lastdir=Vector2.ZERO
 
 @export var jumpForgivenessTime:float=0.125
+
 func _ready():
+	GlobalHelper.player=self
 	makeTimer("jumpForgivenessTimer",jumpForgivenessTime,nojumps)
 func makeTimer(namee,duration,fn):
 	var t=Timer.new()
@@ -71,7 +73,7 @@ func Base(delta):
 			velocity.x+=movedir.x*delta*accelRate*moveSpeed
 	#jumping
 	if(movedir.y!=0):
-		var wall_jump=get_wall_normals(delta)
+		var wall_jump=get_wall_normals()
 		#default jump, then wall jump check
 		if(canJump||(cur_jump_count<maxJumps&&(wall_jump.x==0||!wallJump))):
 			cur_jump_count+=1
@@ -79,10 +81,12 @@ func Base(delta):
 			wallJumped=false
 			canJump=false
 		elif(wall_jump.x!=0&&wallJump):
+			var vell=velocity.y
 			velocity= wallJumpForce*Vector2(wall_jump.x,-1)
+			velocity.y=velocity.y+min(vell,0.)
 			wallJumped=true
 	#wall clinging
-	if Input.is_action_just_pressed("shift")&&wallCling&&get_wall_normals(delta)!=Vector2.ZERO:
+	if Input.is_action_just_pressed("shift")&&wallCling&&get_wall_normals()!=Vector2.ZERO:
 		doCling=true
 	if Input.is_action_just_released("shift"):
 		doCling=false
@@ -92,7 +96,7 @@ func Base(delta):
 		velocity=Vector2.ZERO
 
 #returns normal values for the wall slide collision
-func get_wall_normals(delta:float=0.):
+func get_wall_normals():
 	var storedvel=velocity;var lpos=position
 	velocity.x=lastdir.x
 	move_and_slide()
@@ -103,7 +107,6 @@ func get_wall_normals(delta:float=0.):
 			var norm= get_slide_collision( slide ).get_normal()
 			if norm.x!=0:
 				return norm
-				break
 	return Vector2.ZERO
 
 #disables jump after the forgiveness time is up
@@ -115,3 +118,13 @@ func nocling():
 #inputs as a vector2
 func getInputMotion():
 	return Vector2(int(Input.is_action_pressed("r"))-int(Input.is_action_pressed("l")),int(Input.is_action_just_pressed("jump")))
+
+
+
+#used to reset cling and jumps if its upward
+func bounceOff(side=Vector2.ZERO,force:float=0.0):
+	super.bounceOff(side,force)
+	if side.y==-1:
+		totalCling=0.
+		canJump=true
+		cur_jump_count=-1

@@ -11,7 +11,32 @@ func _physics_process(delta):
 		velocity.x-=velocity.x*delta*friction
 	else:
 		velocity.y+=Gravity*delta
+#full bounce calculations done here
+func bounceOffFull(pos,force:int=0,sides=[true,true,true,true]):
+	var bangle = getLargestNormal((global_position-pos).normalized())
+	bangle=checkIfCan(bangle,sides)
+	bounceOff(-bangle,force)
+#only bounces of side if it can
+func checkIfCan(angle,sides):
+	match(angle.x):
+		-1.:
+			if !sides[0]:angle.x=0
+		1.:
+			if !sides[1]:angle.x=0
 
+	match(angle.y):
+		-1.:
+			if !sides[2]:angle.y=0
+		1.:
+			if !sides[3]:angle.y=0
+	return angle
+
+#returns the largest normal value
+func getLargestNormal(normal):
+	if(abs(normal.x)>abs(normal.y)):
+		return Vector2(1*sign(normal.x),0)
+	else:
+		return Vector2(0,1*sign(normal.y))
 
 
 func bounceOff(side=Vector2.ZERO,force:float=0.0):

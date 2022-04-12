@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcu42xbn6wt0t"]
+[gd_scene load_steps=11 format=3 uid="uid://dcu42xbn6wt0t"]
 
 [ext_resource type="Script" path="res://objects/PlayerParkour2D.gd" id="1_8ca5o"]
+[ext_resource type="Script" path="res://testingscene.gd" id="1_a4kw5"]
+[ext_resource type="Script" path="res://objects/CrawlerPlatformer2D.gd" id="1_g3eiv"]
 [ext_resource type="Texture2D" uid="uid://47hvfqsdp74" path="res://icon.png" id="2_r2cs8"]
 [ext_resource type="Script" path="res://objects/bouncePad2D.gd" id="3_aqxux"]
+[ext_resource type="Script" path="res://objects/CinemaCamera2D.gd" id="5_bor1b"]
+[ext_resource type="Script" path="res://objects/Platform2D.gd" id="6_yw82o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03qcu"]
 size = Vector2(31.9, 31.9)
@@ -33,14 +37,42 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource( "TileSetAtlasSource_4cpfv" )
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource( "1_a4kw5" )
 
-[node name="PlayerParkour2D" type="CharacterBody2D" parent="."]
-position = Vector2(138, 135)
-collision_layer = 3
-script = ExtResource( "1_8ca5o" )
+[node name="CrawlerPlatformer2D" type="CharacterBody2D" parent="."]
+position = Vector2(368, 272)
+script = ExtResource( "1_g3eiv" )
 __meta__ = {
 "_edit_group_": true
 }
+size = Vector2(32, 32)
+speed = 32
+checkWalls = false
+fireProjectiles = true
+
+[node name="Icon" type="Sprite2D" parent="CrawlerPlatformer2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource( "2_r2cs8" )
+
+[node name="CrawlerPlatformer2D2" type="CharacterBody2D" parent="."]
+position = Vector2(880, 144)
+script = ExtResource( "1_g3eiv" )
+__meta__ = {
+"_edit_group_": true
+}
+size = Vector2(32, 32)
+speed = 32
+direction = Vector2(0, 1)
+checkFloor = false
+
+[node name="Icon" type="Sprite2D" parent="CrawlerPlatformer2D2"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource( "2_r2cs8" )
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(138, 135)
+collision_layer = 2
+script = ExtResource( "1_8ca5o" )
 Gravity = 320
 jumpForce = 160
 wallJump = true
@@ -48,12 +80,19 @@ wallCling = true
 wallClingDuration = 2.0
 current_state = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerParkour2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource( "RectangleShape2D_03qcu" )
 
-[node name="Icon" type="Sprite2D" parent="PlayerParkour2D"]
+[node name="Icon" type="Sprite2D" parent="Player"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource( "2_r2cs8" )
+
+[node name="CinemaCamera2D" type="Camera2D" parent="Player"]
+current = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+script = ExtResource( "5_bor1b" )
+shake_decay = 0.75
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( "TileSet_rmtle" )
@@ -67,7 +106,6 @@ script = ExtResource( "3_aqxux" )
 force = 256.0
 left = false
 right = false
-down = false
 
 [node name="Sprite2D" type="Sprite2D" parent="bouncePad2D"]
 scale = Vector2(0.5, 0.5)
@@ -115,3 +153,12 @@ down = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource( "2_r2cs8" )
 centered = false
+
+[node name="projectileholder" type="Node2D" parent="."]
+
+[node name="Platform2D" type="Sprite2D" parent="projectileholder"]
+position = Vector2(384, 472)
+scale = Vector2(3, 0.625)
+texture = ExtResource( "2_r2cs8" )
+script = ExtResource( "6_yw82o" )
+wait_at_end = 1.0

@@ -19,12 +19,8 @@ func _ready():
 	bcheck.transform=transform
 	bcheck.transform.origin+=checkSize/2
 	addCollision()
-var drawline=Vector2.ZERO
-func _draw():
-	if !Engine.is_editor_hint():return
-	draw_rect(Rect2(Vector2.ZERO,checkSize),Color(0.5,0.5,0.75,0.5))
-func _process(delta):
-	update()
+
+
 func _physics_process(_delta):
 	
 	if Engine.is_editor_hint():return
@@ -33,34 +29,9 @@ func _physics_process(_delta):
 		for obj in check:
 			var this=obj.collider
 			if !this.has_method("bounceOff"):continue
-			var bangle = getLargestNormal((this.global_position-global_position-checkSize/2).normalized())
-			bangle=checkIfCan(bangle)
-			this.bounceOff(-bangle,force)
-			drawline=bangle*64
+			this.bounceOffFull(global_position+checkSize/2,force,[left,right,up,down])
 			
 		emit_signal("bounced")
-
-
-#returns the largest normal value
-func getLargestNormal(normal):
-	if(abs(normal.x)>abs(normal.y)):
-		return Vector2(1*sign(normal.x),0)
-	else:
-		return Vector2(0,1*sign(normal.y))
-#makes sure the side is allowed
-func checkIfCan(angle):
-	match(angle.x):
-		-1.:
-			if !left:angle.x=0
-		1.:
-			if !right:angle.x=0
-
-	match(angle.y):
-		-1.:
-			if !up:angle.y=0
-		1.:
-			if !down:angle.y=0
-	return angle
 
 
 #builds its collision

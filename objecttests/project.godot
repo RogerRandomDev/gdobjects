@@ -9,15 +9,40 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Camera2D",
+"class": &"CinemaCamera2D",
+"language": &"GDScript",
+"path": "res://objects/CinemaCamera2D.gd"
+}, {
+"base": "ObjectBase2D",
+"class": &"CrawlerPlatformer2D",
+"language": &"GDScript",
+"path": "res://objects/CrawlerPlatformer2D.gd"
+}, {
 "base": "CharacterBody2D",
 "class": &"ObjectBase2D",
 "language": &"GDScript",
 "path": "res://objects/ObjectBase2D.gd"
 }, {
+"base": "Sprite2D",
+"class": &"Platform2D",
+"language": &"GDScript",
+"path": "res://objects/Platform2D.gd"
+}, {
 "base": "ObjectBase2D",
 "class": &"PlayerParkour2D",
 "language": &"GDScript",
 "path": "res://objects/PlayerParkour2D.gd"
+}, {
+"base": "Sprite2D",
+"class": &"Projectile2D",
+"language": &"GDScript",
+"path": "res://objects/Projectile2D.gd"
+}, {
+"base": "Node2D",
+"class": &"ProjectileLauncher2D",
+"language": &"GDScript",
+"path": "res://objects/ProjectileLauncher2D.gd"
 }, {
 "base": "Node2D",
 "class": &"bouncePad2D",
@@ -25,8 +50,13 @@ _global_script_classes=[{
 "path": "res://objects/bouncePad2D.gd"
 }]
 _global_script_class_icons={
+"CinemaCamera2D": "",
+"CrawlerPlatformer2D": "",
 "ObjectBase2D": "",
+"Platform2D": "",
 "PlayerParkour2D": "",
+"Projectile2D": "",
+"ProjectileLauncher2D": "",
 "bouncePad2D": ""
 }
 
@@ -36,6 +66,14 @@ config/name="objecttests"
 run/main_scene="res://testingscene.tscn"
 config/icon="res://icon.png"
 config/features=PackedStringArray("4.0", "Vulkan Clustered")
+
+[autoload]
+
+GlobalHelper="*res://objectSupport/globalHelper.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [input]
 
