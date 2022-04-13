@@ -7,6 +7,10 @@ class_name Platform2D
 @export var wait_at_end:float=0.0
 @export var bouncy:bool=true
 @export var force:int=256
+@export var left:bool=true
+@export var right:bool=true
+@export var up:bool=true
+@export var down:bool=true
 var my_collision=null
 var travelled=0.0
 var shape=PhysicsShapeQueryParameters2D.new()
@@ -79,5 +83,5 @@ func checkBounce():
 		for bodyy in check.size():
 			var bod=check[bodyy]
 			if !bod.collider.has_method("bounceOff"):continue
-			bod.collider.bounceOffFull(average,force)
+			bod.collider.bounceOffFull(average,force,[left,right,up,down])
 	

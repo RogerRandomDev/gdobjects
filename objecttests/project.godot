@@ -14,10 +14,15 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://objects/CinemaCamera2D.gd"
 }, {
-"base": "ObjectBase2D",
+"base": "LivingObject2D",
 "class": &"CrawlerPlatformer2D",
 "language": &"GDScript",
 "path": "res://objects/CrawlerPlatformer2D.gd"
+}, {
+"base": "ObjectBase2D",
+"class": &"LivingObject2D",
+"language": &"GDScript",
+"path": "res://objects/LivingObject2D.gd"
 }, {
 "base": "CharacterBody2D",
 "class": &"ObjectBase2D",
@@ -29,7 +34,7 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://objects/Platform2D.gd"
 }, {
-"base": "ObjectBase2D",
+"base": "LivingObject2D",
 "class": &"PlayerParkour2D",
 "language": &"GDScript",
 "path": "res://objects/PlayerParkour2D.gd"
@@ -52,6 +57,7 @@ _global_script_classes=[{
 _global_script_class_icons={
 "CinemaCamera2D": "",
 "CrawlerPlatformer2D": "",
+"LivingObject2D": "",
 "ObjectBase2D": "",
 "Platform2D": "",
 "PlayerParkour2D": "",
@@ -98,3 +104,7 @@ shift={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":16777237,"unicode":0,"echo":false,"script":null)
 ]
 }
+
+[physics]
+
+common/physics_ticks_per_second=120

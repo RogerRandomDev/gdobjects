@@ -42,9 +42,6 @@ script = ExtResource( "1_a4kw5" )
 [node name="CrawlerPlatformer2D" type="CharacterBody2D" parent="."]
 position = Vector2(368, 272)
 script = ExtResource( "1_g3eiv" )
-__meta__ = {
-"_edit_group_": true
-}
 size = Vector2(32, 32)
 speed = 32
 checkWalls = false
@@ -57,9 +54,6 @@ texture = ExtResource( "2_r2cs8" )
 [node name="CrawlerPlatformer2D2" type="CharacterBody2D" parent="."]
 position = Vector2(880, 144)
 script = ExtResource( "1_g3eiv" )
-__meta__ = {
-"_edit_group_": true
-}
 size = Vector2(32, 32)
 speed = 32
 direction = Vector2(0, 1)
@@ -87,13 +81,6 @@ shape = SubResource( "RectangleShape2D_03qcu" )
 scale = Vector2(0.5, 0.5)
 texture = ExtResource( "2_r2cs8" )
 
-[node name="CinemaCamera2D" type="Camera2D" parent="Player"]
-current = true
-smoothing_enabled = true
-smoothing_speed = 15.0
-script = ExtResource( "5_bor1b" )
-shake_decay = 0.75
-
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( "TileSet_rmtle" )
 format = 2
@@ -106,11 +93,11 @@ script = ExtResource( "3_aqxux" )
 force = 256.0
 left = false
 right = false
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="bouncePad2D"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource( "2_r2cs8" )
-centered = false
 
 [node name="bouncePad2D2" type="Node2D" parent="."]
 show_behind_parent = true
@@ -120,11 +107,11 @@ force = 256.0
 left = false
 right = false
 down = false
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="bouncePad2D2"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource( "2_r2cs8" )
-centered = false
 
 [node name="bouncePad2D3" type="Node2D" parent="."]
 show_behind_parent = true
@@ -134,11 +121,11 @@ force = 256.0
 left = false
 right = false
 down = false
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="bouncePad2D3"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource( "2_r2cs8" )
-centered = false
 
 [node name="bouncePad2D4" type="Node2D" parent="."]
 show_behind_parent = true
@@ -148,11 +135,11 @@ force = 256.0
 left = false
 right = false
 down = false
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="bouncePad2D4"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource( "2_r2cs8" )
-centered = false
 
 [node name="projectileholder" type="Node2D" parent="."]
 
@@ -162,3 +149,17 @@ scale = Vector2(3, 0.625)
 texture = ExtResource( "2_r2cs8" )
 script = ExtResource( "6_yw82o" )
 wait_at_end = 1.0
+left = false
+right = false
+down = false
+
+[node name="Background" type="Node2D" parent="."]
+z_index = -1
+
+[node name="CinemaCamera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+smoothing_enabled = true
+smoothing_speed = 15.0
+script = ExtResource( "5_bor1b" )
+shake_decay = 0.75

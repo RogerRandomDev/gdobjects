@@ -1,4 +1,4 @@
-extends ObjectBase2D
+extends LivingObject2D
 class_name CrawlerPlatformer2D
 var shape = PhysicsPointQueryParameters2D.new()
 @export var size:Vector2=Vector2.ZERO

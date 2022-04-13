@@ -1,6 +1,13 @@
+ColorRect
+MeshInstance3D
+Node2D
+OmniLight3D
+Camera3D
+Node3D
+SubViewport
+SubViewportContainer
 CinemaCamera2D (CinemaCamera2D.gd)
 Platform2D (Platform2D.gd)
-Node2D
 CrawlerPlatformer2D (CrawlerPlatformer2D.gd)
 Sprite2D
 PlayerParkour2D (PlayerParkour2D.gd)

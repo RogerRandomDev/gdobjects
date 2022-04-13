@@ -1,4 +1,4 @@
-extends ObjectBase2D
+extends LivingObject2D
 class_name PlayerParkour2D
 #lotsa variables for this bastard
 @export var jumpForce:int=128
