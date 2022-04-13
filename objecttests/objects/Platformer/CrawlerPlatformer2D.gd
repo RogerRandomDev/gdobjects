@@ -1,4 +1,4 @@
-extends LivingObject2D
+extends PLLivingObject2D
 class_name CrawlerPlatformer2D
 var shape = PhysicsPointQueryParameters2D.new()
 @export var size:Vector2=Vector2.ZERO
@@ -19,7 +19,7 @@ func _ready():
 		delay_timer.name="delay"
 		add_child(delay_timer)
 	if fireProjectiles:
-		var launcher=ProjectileLauncher2D.new()
+		var launcher=PLProjectileLauncher2D.new()
 		add_child(launcher)
 	
 

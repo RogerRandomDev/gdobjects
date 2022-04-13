@@ -1,5 +1,5 @@
 extends ObjectBase2D
-class_name LivingObject2D
+class_name PLLivingObject2D
 signal killed
 @export var maxHealth:int=10
 var Health=10

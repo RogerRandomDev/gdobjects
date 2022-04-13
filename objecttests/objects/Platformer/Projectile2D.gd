@@ -1,5 +1,5 @@
 extends Sprite2D
-class_name Projectile2D
+class_name PLProjectile2D
 const max_life=15
 var my_life=0.0
 var direction=Vector2.ZERO

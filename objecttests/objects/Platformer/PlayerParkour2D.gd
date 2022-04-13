@@ -1,5 +1,5 @@
-extends LivingObject2D
-class_name PlayerParkour2D
+extends PLLivingObject2D
+class_name PLPlayerParkour2D
 #lotsa variables for this bastard
 @export var jumpForce:int=128
 

@@ -1,5 +1,5 @@
 extends Node2D
-class_name ProjectileLauncher2D
+class_name PLProjectileLauncher2D
 
 @export var fire_rate=0.125
 var time_since_last=0.0
@@ -24,7 +24,7 @@ func loadray():
 
 
 func fireProjectile(direction):
-	var proj=Projectile2D.new()
+	var proj=PLProjectile2D.new()
 	proj.direction=direction*512
 	proj.global_position=global_position
 	GlobalHelper.ProjectileHolder.add_child(proj)

@@ -1,1 +1,6 @@
+res://objectSupport/TDglobalHelper.gd
+res://objects/TopDown/powerupdrops/ballDrop.gd
+res://objects/TopDown/powerups/TDballDrop.gd
+res://objects/TopDown/powerups/TDsidewaySwipe.gd
+res://testingscene.gd
 res://testingscene.tscn

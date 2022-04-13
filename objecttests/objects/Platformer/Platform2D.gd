@@ -1,5 +1,5 @@
 extends Sprite2D
-class_name Platform2D
+class_name PLPlatform2D
 
 @export var moving:bool=true
 @export var moveDirection:Vector2=Vector2(128,0)

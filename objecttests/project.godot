@@ -14,56 +14,98 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://objects/CinemaCamera2D.gd"
 }, {
-"base": "LivingObject2D",
+"base": "PLLivingObject2D",
 "class": &"CrawlerPlatformer2D",
 "language": &"GDScript",
-"path": "res://objects/CrawlerPlatformer2D.gd"
-}, {
-"base": "ObjectBase2D",
-"class": &"LivingObject2D",
-"language": &"GDScript",
-"path": "res://objects/LivingObject2D.gd"
+"path": "res://objects/Platformer/CrawlerPlatformer2D.gd"
 }, {
 "base": "CharacterBody2D",
 "class": &"ObjectBase2D",
 "language": &"GDScript",
-"path": "res://objects/ObjectBase2D.gd"
+"path": "res://objects/Platformer/ObjectBase2D.gd"
+}, {
+"base": "ObjectBase2D",
+"class": &"PLLivingObject2D",
+"language": &"GDScript",
+"path": "res://objects/Platformer/LivingObject2D.gd"
 }, {
 "base": "Sprite2D",
-"class": &"Platform2D",
+"class": &"PLPlatform2D",
 "language": &"GDScript",
-"path": "res://objects/Platform2D.gd"
+"path": "res://objects/Platformer/Platform2D.gd"
 }, {
-"base": "LivingObject2D",
-"class": &"PlayerParkour2D",
+"base": "PLLivingObject2D",
+"class": &"PLPlayerParkour2D",
 "language": &"GDScript",
-"path": "res://objects/PlayerParkour2D.gd"
+"path": "res://objects/Platformer/PlayerParkour2D.gd"
 }, {
 "base": "Sprite2D",
-"class": &"Projectile2D",
+"class": &"PLProjectile2D",
 "language": &"GDScript",
-"path": "res://objects/Projectile2D.gd"
+"path": "res://objects/Platformer/Projectile2D.gd"
 }, {
 "base": "Node2D",
-"class": &"ProjectileLauncher2D",
+"class": &"PLProjectileLauncher2D",
 "language": &"GDScript",
-"path": "res://objects/ProjectileLauncher2D.gd"
+"path": "res://objects/Platformer/ProjectileLauncher2D.gd"
 }, {
 "base": "Node2D",
-"class": &"bouncePad2D",
+"class": &"PLbouncePad2D",
 "language": &"GDScript",
-"path": "res://objects/bouncePad2D.gd"
+"path": "res://objects/Platformer/bouncePad2D.gd"
+}, {
+"base": "Sprite2D",
+"class": &"TDEntity2D",
+"language": &"GDScript",
+"path": "res://objects/TopDown/TDEntity2D.gd"
+}, {
+"base": "TDEntity2D",
+"class": &"TDPickUp2D",
+"language": &"GDScript",
+"path": "res://objects/TopDown/TDpickup2D.gd"
+}, {
+"base": "TDEntity2D",
+"class": &"TDPlayer2D",
+"language": &"GDScript",
+"path": "res://objects/TopDown/TDplayer2D.gd"
+}, {
+"base": "Node",
+"class": &"TDPowerUpBase2D",
+"language": &"GDScript",
+"path": "res://objects/TopDown/powerups/TDPowerUpBase2D.gd"
+}, {
+"base": "TDPowerUpBase2D",
+"class": &"TDballDrop",
+"language": &"GDScript",
+"path": "res://objects/TopDown/powerups/TDballDrop.gd"
+}, {
+"base": "Sprite2D",
+"class": &"TDdroppedBall",
+"language": &"GDScript",
+"path": "res://objects/TopDown/powerupdrops/ballDrop.gd"
+}, {
+"base": "TDPowerUpBase2D",
+"class": &"TDsidewaySwipe",
+"language": &"GDScript",
+"path": "res://objects/TopDown/powerups/TDsidewaySwipe.gd"
 }]
 _global_script_class_icons={
 "CinemaCamera2D": "",
 "CrawlerPlatformer2D": "",
-"LivingObject2D": "",
 "ObjectBase2D": "",
-"Platform2D": "",
-"PlayerParkour2D": "",
-"Projectile2D": "",
-"ProjectileLauncher2D": "",
-"bouncePad2D": ""
+"PLLivingObject2D": "",
+"PLPlatform2D": "",
+"PLPlayerParkour2D": "",
+"PLProjectile2D": "",
+"PLProjectileLauncher2D": "",
+"PLbouncePad2D": "",
+"TDEntity2D": "",
+"TDPickUp2D": "",
+"TDPlayer2D": "",
+"TDPowerUpBase2D": "",
+"TDballDrop": "",
+"TDdroppedBall": "",
+"TDsidewaySwipe": ""
 }
 
 [application]
@@ -75,7 +117,8 @@ config/features=PackedStringArray("4.0", "Vulkan Clustered")
 
 [autoload]
 
-GlobalHelper="*res://objectSupport/globalHelper.gd"
+GlobalHelper="*res://objectSupport/PLglobalHelper.gd"
+TDglobal="*res://objectSupport/TDglobalHelper.gd"
 
 [display]
 
@@ -102,6 +145,16 @@ jump={
 shift={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":16777237,"unicode":0,"echo":false,"script":null)
+]
+}
+down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"unicode":0,"echo":false,"script":null)
+]
+}
+up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"store_command":true,"alt_pressed":false,"shift_pressed":false,"meta_pressed":false,"command_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"unicode":0,"echo":false,"script":null)
 ]
 }
 

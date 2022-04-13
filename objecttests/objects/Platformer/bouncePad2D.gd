@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-class_name bouncePad2D
+class_name PLbouncePad2D
 signal bounced
 @export var active:bool=true
 @export var checkSize:Vector2=Vector2(32,32)
