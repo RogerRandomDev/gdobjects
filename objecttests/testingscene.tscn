@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://objects/Platform2D.gd" id="6_yw82o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_03qcu"]
-size = Vector2(31.9, 31.9)
+size = Vector2(31.5, 31.5)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4cpfv"]
 texture = ExtResource( "2_r2cs8" )
