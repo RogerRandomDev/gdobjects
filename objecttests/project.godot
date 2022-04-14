@@ -54,6 +54,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://objects/Platformer/bouncePad2D.gd"
 }, {
+"base": "TDPowerUpBase2D",
+"class": &"TDDamageAura",
+"language": &"GDScript",
+"path": "res://objects/TopDown/powerups/TDDamageAura.gd"
+}, {
 "base": "Sprite2D",
 "class": &"TDEntity2D",
 "language": &"GDScript",
@@ -85,6 +90,16 @@ _global_script_classes=[{
 "path": "res://objects/TopDown/powerupdrops/ballDrop.gd"
 }, {
 "base": "TDPowerUpBase2D",
+"class": &"TDnearShot",
+"language": &"GDScript",
+"path": "res://objects/TopDown/powerups/TDnearShot.gd"
+}, {
+"base": "Sprite2D",
+"class": &"TDprojectile",
+"language": &"GDScript",
+"path": "res://objects/TopDown/powerupdrops/TDprojectile.gd"
+}, {
+"base": "TDPowerUpBase2D",
 "class": &"TDsidewaySwipe",
 "language": &"GDScript",
 "path": "res://objects/TopDown/powerups/TDsidewaySwipe.gd"
@@ -99,12 +114,15 @@ _global_script_class_icons={
 "PLProjectile2D": "",
 "PLProjectileLauncher2D": "",
 "PLbouncePad2D": "",
+"TDDamageAura": "",
 "TDEntity2D": "",
 "TDPickUp2D": "",
 "TDPlayer2D": "",
 "TDPowerUpBase2D": "",
 "TDballDrop": "",
 "TDdroppedBall": "",
+"TDnearShot": "",
+"TDprojectile": "",
 "TDsidewaySwipe": ""
 }
 
@@ -160,4 +178,8 @@ up={
 
 [physics]
 
+2d/run_on_separate_thread=true
 common/physics_ticks_per_second=120
+2d/physics_engine="GodotPhysics2D"
+2d/solver/solver_iterations=1
+common/enable_object_picking=false

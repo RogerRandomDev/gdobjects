@@ -4,6 +4,7 @@ var attacksprite=Sprite2D.new()
 
 func _ready():
 	atkSpeed=1
+	atkPower=50
 	attacksprite.texture=load("res://icon.png")
 	add_child(attacksprite)
 	attacksprite.visible=false
@@ -26,7 +27,7 @@ func _physics_process(delta):
 
 func hitside(side=1.):
 	side*=p.facing.x
-	attacksprite.scale.x=atkRange/64 * side
+	attacksprite.scale.x=atkRange/64. * side
 	var overlap=TDglobal.get_overlapping_objects_box(get_parent(),Vector2(256,64),Vector2(256*min(max(side,-1),0),-48))
 	var pos=get_parent().global_position
 	for object in overlap:

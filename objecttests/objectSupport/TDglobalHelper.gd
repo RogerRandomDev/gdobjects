@@ -17,6 +17,8 @@ var atkduration=1.
 var objects:Array=[]
 #object pickup array
 var pickups:Array=[]
+#update objects
+var updateObjects:Array=[]
 #the player object for things to move to
 var player=null
 #the camera
@@ -33,14 +35,7 @@ func remove_pickup(obj):pickups.erase(obj)
 #sets player
 func setPlayer(obj):player=obj
 
-func collide_objects(obj,player=false):
-	var global_position =obj.global_position
-	for object in objects:
-		if object==obj:continue
-		var dist=(object.global_position-global_position).length_squared()
-		if(dist<=16384&&object.has_method("pickup")&&player):object.pickup(obj);continue
-		if dist<=9216:
-			if(object.has_method("attack")):object.attack(obj)
+
 
 
 func get_overlapping_objects_box(obj,areaEnd,areaStart=Vector2.ZERO):
@@ -68,7 +63,7 @@ func get_overlapping_objects_round(obj,area):
 	var pos=obj.global_position
 	area*=area
 	for object in objects:
-		if (object.global_position-pos).length_squared()<area:returned.append(object)
+		if object!=obj&&(object.global_position-pos).length_squared()<area:returned.append(object)
 	return returned
 
 
@@ -77,10 +72,29 @@ func pickup_overlapping_items(obj,area):
 	var pos=obj.global_position
 	area*=area
 	for object in pickups:
-		if !object.has_method("pickup"):continue
-		if((object.global_position-pos).length_squared()<area):object.pickup(obj)
+		if !is_instance_valid(object)||!object.has_method("pickup"):continue
+		if ((object.global_position-pos).length_squared()<area):object.pickup(obj)
 
 
 func popDamage(input,global_position):
-	textPop.curText[input]=[1.5,global_position]
+	textPop.curText.append([1.5,global_position,input])
 
+
+
+#threading for the enemies
+var thread=Thread.new()
+var semaphore=Semaphore.new()
+var time=0
+func _ready():
+	thread.start(update_objects)
+var root=null
+func update_objects():
+	while true:
+		semaphore.wait()
+		root.physics_process(time)
+		for obj in objects:if obj.is_inside_tree():obj.physics_process(time)
+		for obj in pickups:if obj.is_inside_tree():obj.physics_process(time)
+
+func _physics_process(delta):
+	time=delta
+	semaphore.post()

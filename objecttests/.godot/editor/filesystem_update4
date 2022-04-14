@@ -1,6 +1,11 @@
 res://objectSupport/TDglobalHelper.gd
-res://objects/TopDown/powerupdrops/ballDrop.gd
-res://objects/TopDown/powerups/TDballDrop.gd
+res://objects/TopDown/TDEntity2D.gd
+res://objects/TopDown/TDpickup2D.gd
+res://objects/TopDown/TDplayer2D.gd
+res://objects/TopDown/powerupdrops/TDprojectile.gd
+res://objects/TopDown/powerups/TDDamageAura.gd
+res://objects/TopDown/powerups/TDPowerUpBase2D.gd
+res://objects/TopDown/powerups/TDnearShot.gd
 res://objects/TopDown/powerups/TDsidewaySwipe.gd
 res://testingscene.gd
 res://testingscene.tscn

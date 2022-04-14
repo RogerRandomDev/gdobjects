@@ -4,7 +4,7 @@ class_name TDPowerUpBase2D
 var atkRange=256
 var atkSpeed=0.125
 var atkDuration=1
-var atkPower=50
+var atkPower=5
 var curTime=0.
 var knockbackForce=256.
 var p=null

@@ -6,9 +6,10 @@ var progress=-0.5
 var expVal=1
 func _ready():
 	super._ready()
+	z_index=-1
 	TDglobal.remove_object(self)
 	TDglobal.add_pickup(self)
-func _physics_process(delta):
+func physics_process(delta):
 	if move_to==null:return
 	progress+=delta
 	var dist=(move_to.global_position-global_position)
@@ -27,4 +28,4 @@ func pickup(obj):move_to=obj
 
 func prep_free():
 	TDglobal.remove_pickup(self)
-	queue_free()
+	call_deferred('queue_free')

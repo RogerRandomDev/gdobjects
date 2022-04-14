@@ -4,7 +4,7 @@ class_name TDdroppedBall
 var gravity=128
 var velocity=Vector2.ZERO
 var hitcount=0
-var maxHits=1
+var maxHits=5
 var size=32
 var damage=10
 var lifetime=0

@@ -10,13 +10,14 @@ var Health=100
 var invuln=0
 var knockBack=0.0
 var knockBackDir=0.0
+var repel_force=Vector2.ZERO
 #builds entity
 func _ready():
 	Health=maxHealth
 	TDglobal.add_object(self)
 	texture=load("res://icon.png")
-
-func _physics_process(delta):
+var recheck=0
+func physics_process(delta):
 	if(invuln>0):
 		self_modulate=Color(100,0,0)
 		invuln-=delta
@@ -24,11 +25,24 @@ func _physics_process(delta):
 		self_modulate=Color.WHITE
 	if TDglobal.player!=self:
 		var move_dir=(TDglobal.player.global_position-global_position)
-		if move_dir.length_squared()>4096:position+=move_dir.normalized()*delta*moveSpeed
+		if move_dir.length_squared()<4096:move_dir=Vector2.ZERO
+		position+=(move_dir+repel_force).normalized()*delta*moveSpeed
+		#allows them to repel their neighbors
+		if recheck>=15:
+			recheck=0
+			repel_force=Vector2.ZERO
+			var overlap=TDglobal.get_overlapping_objects_round(self,256)
+			for object in overlap:
+				if object==TDglobal.player:continue
+				var de=(object.global_position-global_position)
+				var dir=de.normalized()
+				repel_force-=(dir*(65536-de.length_squared()))*0.00075
+			
+		else:
+			recheck+=1
 	if knockBack:
 		knockBack=max(knockBack-delta,0)
 		position+=knockBackDir*knockBack*delta
-
 func attack(object):
 	if(object.invuln<=0):object.hurt(attackPower)
 func hurt(power):
@@ -38,7 +52,10 @@ func hurt(power):
 #dies and decides whether or not to drop exp orb
 func die():
 	var drop_item=randi_range(0,5)<1*TDglobal.luck
-	
+	if drop_item:
+		var item=TDPickUp2D.new()
+		get_parent().add_child(item)
+		item.global_position=global_position
 	prep_free()
 
 

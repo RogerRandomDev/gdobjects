@@ -1,8 +1,12 @@
+TDnearShot (TDnearShot.gd)
+PLProjectileLauncher2D (ProjectileLauncher2D.gd)
+TDprojectile (TDprojectile.gd)
+TDDamageAura (TDDamageAura.gd)
+TDsidewaySwipe (TDsidewaySwipe.gd)
 TDballDrop (TDballDrop.gd)
 Camera2D
 Control
 CanvasLayer
-TDsidewaySwipe (TDsidewaySwipe.gd)
 TDPickUp2D (TDpickup2D.gd)
 TDEntity2D (TDEntity2D.gd)
 PLLivingObject2D (LivingObject2D.gd)

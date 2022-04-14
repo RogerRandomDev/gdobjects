@@ -2,15 +2,16 @@ extends TDEntity2D
 class_name TDPlayer2D
 
 
-var exp=0
+var expe=0
 var level=1
 
 var facing=Vector2(1,0)
 func _ready():
 	super._ready()
 	TDglobal.setPlayer(self)
+	TDglobal.remove_object(self)
 func _physics_process(delta):
-	super._physics_process(delta)
+	super.physics_process(delta)
 	var dir=get_inputs()
 	
 	#sets facing direction for abilities
@@ -19,10 +20,10 @@ func _physics_process(delta):
 	position+=dir*moveSpeed*delta
 	var hit_enemy=TDglobal.get_overlapping_objects_box(self,Vector2(64,64),Vector2(-32,-32))
 	if hit_enemy:hit_enemy[0].attack(self)
-	TDglobal.pickup_overlapping_items(self,128)
+	TDglobal.pickup_overlapping_items(self,72)
 
 func gainExp(val):
-	exp+=val
+	expe+=val
 func hurt(val):
 	Health=max(Health-val,0)
 	invuln=0.25

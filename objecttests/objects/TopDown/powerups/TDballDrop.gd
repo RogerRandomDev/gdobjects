@@ -17,10 +17,10 @@ func _physics_process(delta):
 		tween.tween_interval(0.25)
 func makedrop():
 	var dir=Vector2(
-		randi_range(-32,32),
-		randi_range(-96,-64)
+		randi_range(-96,96),
+		randi_range(-160,-96)
 	)
 	var drop=TDdroppedBall.new()
 	p.get_parent().add_child(drop)
-	drop.velocity=dir
+	drop.velocity=dir+p.get_inputs()*p.moveSpeed
 	drop.global_position=p.global_position
