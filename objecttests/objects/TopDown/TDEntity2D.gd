@@ -10,39 +10,55 @@ var Health=100
 var invuln=0
 var knockBack=0.0
 var knockBackDir=0.0
-var repel_force=Vector2.ZERO
+var is_player=false
+
+func changed():return
 #builds entity
 func _ready():
+	disable_process()
 	Health=maxHealth
 	TDglobal.add_object(self)
 	texture=load("res://icon.png")
-var recheck=0
+func disable_process():
+	set_physics_process(false)
+	set_process(false)
+	set_process_internal(false)
+	set_physics_process_internal(false)
+func enable_process():
+	set_physics_process(true)
+	set_process(true)
+	set_process_internal(true)
+	set_physics_process_internal(true)
+
+var lloop=0
+var push_force=Vector2.ZERO
+var nearby=[]
 func physics_process(delta):
-	if(invuln>0):
-		self_modulate=Color(100,0,0)
-		invuln-=delta
-	else:
-		self_modulate=Color.WHITE
-	if TDglobal.player!=self:
-		var move_dir=(TDglobal.player.global_position-global_position)
-		if move_dir.length_squared()<4096:move_dir=Vector2.ZERO
-		position+=(move_dir+repel_force).normalized()*delta*moveSpeed
-		#allows them to repel their neighbors
-		if recheck>=15:
-			recheck=0
-			repel_force=Vector2.ZERO
-			var overlap=TDglobal.get_overlapping_objects_round(self,256)
-			for object in overlap:
-				if object==TDglobal.player:continue
-				var de=(object.global_position-global_position)
-				var dir=de.normalized()
-				repel_force-=(dir*(65536-de.length_squared()))*0.00075
-			
-		else:
-			recheck+=1
+	
 	if knockBack:
 		knockBack=max(knockBack-delta,0)
 		position+=knockBackDir*knockBack*delta
+	if is_player||!is_inside_tree():return
+	var move_dir=(TDglobal.player.global_position-global_position)
+	if move_dir.length_squared()<4096:return
+	position+=(move_dir.normalized()*moveSpeed+push_force)*delta
+	if lloop%15==0:
+		push_force=Vector2.ZERO
+		for object in nearby:
+			if !object.is_inside_tree():continue
+			var e=(object.global_position-global_position)
+			if e.length_squared()>4096:continue
+			push_force-=e.normalized()*(4096-e.length_squared())/32
+		push_force.x=min(abs(push_force.x),128)*sign(push_force.x)
+		push_force.y=min(abs(push_force.y),128)*sign(push_force.y)
+		if lloop>=60:
+			lloop=0;
+			nearby=[]
+			for enemy in TDglobal.objects:
+				if !enemy.is_inside_tree():continue
+				if(enemy.global_position-global_position).length_squared()<65536:
+					nearby.append(enemy)
+	lloop+=1
 func attack(object):
 	if(object.invuln<=0):object.hurt(attackPower)
 func hurt(power):
@@ -53,15 +69,15 @@ func hurt(power):
 func die():
 	var drop_item=randi_range(0,5)<1*TDglobal.luck
 	if drop_item:
-		var item=TDPickUp2D.new()
-		get_parent().add_child(item)
-		item.global_position=global_position
-	prep_free()
+		var n=TDPickUp2D.new()
+		n.global_position=global_position
+		TDglobal.root.add_child(n)
+	call_deferred('prep_free')
 
 
 func prep_free():
 	TDglobal.remove_object(self)
-	queue_free()
+	call_deferred('queue_free')
 
 
 #knockback function

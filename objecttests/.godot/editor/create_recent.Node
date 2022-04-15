@@ -1,9 +1,11 @@
-TDnearShot (TDnearShot.gd)
-PLProjectileLauncher2D (ProjectileLauncher2D.gd)
-TDprojectile (TDprojectile.gd)
+SubViewport
 TDDamageAura (TDDamageAura.gd)
 TDsidewaySwipe (TDsidewaySwipe.gd)
 TDballDrop (TDballDrop.gd)
+TDdroppedBall (ballDrop.gd)
+TDnearShot (TDnearShot.gd)
+PLProjectileLauncher2D (ProjectileLauncher2D.gd)
+TDprojectile (TDprojectile.gd)
 Camera2D
 Control
 CanvasLayer
@@ -17,7 +19,6 @@ MeshInstance3D
 OmniLight3D
 Camera3D
 Node3D
-SubViewport
 SubViewportContainer
 CinemaCamera2D (CinemaCamera2D.gd)
 CrawlerPlatformer2D (CrawlerPlatformer2D.gd)

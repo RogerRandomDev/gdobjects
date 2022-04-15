@@ -15,7 +15,7 @@ func _physics_process(delta):
 
 var shootAt=null
 func attack_action():
-	var overlaps:=TDglobal.get_overlapping_objects_round(p,1024)
+	var overlaps=TDglobal.get_overlapping_objects_round(p,1024)
 	if overlaps:
 		
 		shootAt=get_closest(overlaps)[0]
