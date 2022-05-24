@@ -26,6 +26,8 @@ var lastdir=Vector2.ZERO
 @export var jumpForgivenessTime:float=0.125
 
 func _ready():
+	add_to_group("player")
+	current_state=statelist.Base
 	GlobalHelper.player=self
 	makeTimer("jumpForgivenessTimer",jumpForgivenessTime,nojumps)
 func makeTimer(namee,duration,fn):
@@ -51,7 +53,7 @@ func Base(delta):
 		wallJumped=false
 		canJump=true
 		totalCling=0.0
-		movedir.x*=friction
+		if movedir.x==0:velocity.x*=friction
 		#this stops the timer for extra jump time after leaving edge
 		if get_node("jumpForgivenessTimer").time_left!=0:get_node("jumpForgivenessTimer").stop()
 	else:

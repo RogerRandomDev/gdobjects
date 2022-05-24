@@ -7,10 +7,13 @@ var shape = PhysicsPointQueryParameters2D.new()
 @export var delay_at_end:float=0.0
 @export var checkFloor:bool=true
 @export var checkWalls:bool=true
+@export var wantFloor:bool=true
+@export var wantWalls:bool=true
+@export var wallCount:int=0
 @export var fireProjectiles:bool=false
 var can_move=true
 func _ready():
-	
+	shape.collision_mask=2
 	shape.position=global_position+size/2
 	if delay_at_end!=0.:
 		var delay_timer=Timer.new()
@@ -26,15 +29,16 @@ func _ready():
 func _physics_process(delta):
 	if !can_move:return
 	super._physics_process(delta)
-	var check=[]
-	var walls=[]
+	var check=0
+	var walls=0
 	if checkFloor:check+=checkfloor()
 	if checkWalls:walls+=checkwalls()
-	if checkFloor&&(check.size()<2||(walls.size()!=0&&direction.y==0)):
+	
+	if checkFloor&&(check<2||(walls!=0&&direction.y==0)):
 		direction.x*=-1
 		can_move=false
 		do_delay()
-	if walls.size()<2&&direction.y!=0:
+	if walls<2&&direction.y!=0:
 		direction.y*=-1
 		can_move=false
 		do_delay()
@@ -47,18 +51,23 @@ func checkfloor():
 	var check:=get_world_2d().direct_space_state.intersect_point(shape)
 	shape.position.x-=size.x
 	check+=get_world_2d().direct_space_state.intersect_point(shape)
-	return check
+	if wantFloor:return check.size()
+	else:return 2-check.size()
 func checkwalls():
 	shape.position=global_position-size/2+Vector2.ONE
 	shape.position.x-=1
 	var check:=get_world_2d().direct_space_state.intersect_point(shape)
-	shape.position.y+=size.y-1
+	shape.position.y+=size.y-2
 	check+=get_world_2d().direct_space_state.intersect_point(shape)
 	shape.position.x+=size.x+2
 	check+=get_world_2d().direct_space_state.intersect_point(shape)
-	shape.position.y-=size.y-1
+	shape.position.y-=size.y-2
 	check+=get_world_2d().direct_space_state.intersect_point(shape)
-	return check
+	#used to make sure if you wanted walls or not
+	if wantWalls:return check.size()
+	else:return wallCount-check.size()
+
+
 
 func move_again():can_move=true
 func do_delay():

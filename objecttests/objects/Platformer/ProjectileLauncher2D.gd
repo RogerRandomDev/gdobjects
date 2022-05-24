@@ -1,7 +1,7 @@
 extends Node2D
 class_name PLProjectileLauncher2D
 
-@export var fire_rate=0.125
+@export var fire_rate=0.25
 var time_since_last=0.0
 var raycheck=PhysicsRayQueryParameters2D.new()
 
@@ -12,10 +12,12 @@ func _physics_process(delta):
 	var world:=get_world_2d().direct_space_state
 	loadray()
 	var check:=world.intersect_ray(raycheck)
-	if check.size()==0||check.collider!=GlobalHelper.player:return
+	if check.size()==0||check.collider!=GlobalHelper.player:
+		time_since_last=min(time_since_last,fire_rate)
+		return
 	var launchdir=(raycheck.to-raycheck.from).normalized()
 	fireProjectile(launchdir)
-	time_since_last=0
+	time_since_last-=fire_rate
 
 
 func loadray():

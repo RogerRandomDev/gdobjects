@@ -1,3 +1,11 @@
+Sprite2D
+PLbouncePad2D (bouncePad2D.gd)
+areaCheck2D (areaCheck.gd)
+Node2D
+CrawlerPlatformer2D (CrawlerPlatformer2D.gd)
+TileMap
+CollisionShape2D
+PLPlayerParkour2D (PlayerParkour2D.gd)
 SubViewport
 TDDamageAura (TDDamageAura.gd)
 TDsidewaySwipe (TDsidewaySwipe.gd)
@@ -13,7 +21,6 @@ TDPickUp2D (TDpickup2D.gd)
 TDEntity2D (TDEntity2D.gd)
 PLLivingObject2D (LivingObject2D.gd)
 TDPlayer2D (TDplayer2D.gd)
-Node2D
 ColorRect
 MeshInstance3D
 OmniLight3D
@@ -21,5 +28,3 @@ Camera3D
 Node3D
 SubViewportContainer
 CinemaCamera2D (CinemaCamera2D.gd)
-CrawlerPlatformer2D (CrawlerPlatformer2D.gd)
-Sprite2D

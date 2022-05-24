@@ -103,6 +103,11 @@ _global_script_classes=[{
 "class": &"TDsidewaySwipe",
 "language": &"GDScript",
 "path": "res://objects/TopDown/powerups/TDsidewaySwipe.gd"
+}, {
+"base": "Node2D",
+"class": &"areaCheck2D",
+"language": &"GDScript",
+"path": "res://objects/Platformer/areaCheck.gd"
 }]
 _global_script_class_icons={
 "CinemaCamera2D": "",
@@ -123,7 +128,8 @@ _global_script_class_icons={
 "TDdroppedBall": "",
 "TDnearShot": "",
 "TDprojectile": "",
-"TDsidewaySwipe": ""
+"TDsidewaySwipe": "",
+"areaCheck2D": ""
 }
 
 [application]
@@ -140,8 +146,6 @@ TDglobal="*res://objectSupport/TDglobalHelper.gd"
 
 [display]
 
-window/size/viewport_width=341
-window/size/viewport_height=200
 window/stretch/mode="viewport"
 
 [input]

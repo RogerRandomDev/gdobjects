@@ -53,4 +53,5 @@ func bounceOff(side=Vector2.ZERO,force:float=0.0):
 			velocity.y= bounceMult*force*vy
 		1.:
 			velocity.y= -bounceMult*force*vy
+	
 	move_and_slide()

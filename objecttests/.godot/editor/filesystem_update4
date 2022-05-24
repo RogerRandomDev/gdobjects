@@ -1,10 +1,7 @@
-res://objectSupport/PLglobalHelper.gd
-res://objectSupport/TDglobalHelper.gd
-res://objects/TopDown/TDEntity2D.gd
-res://objects/TopDown/TDbaseNode.gd
-res://objects/TopDown/TDpickup2D.gd
-res://objects/TopDown/TDplayer2D.gd
-res://objects/TopDown/powerups/TDnearShot.gd
-res://objects/TopDown/textpop.tres.gd
-res://testingscene.gd
+res://objects/Platformer/bouncePad2D.gd
+res://objects/Platformer/bouncepad.tscn
+res://objects/Platformer/bouncepads/bouncepad.tscn
+res://objects/Platformer/bouncepads/bouncepadsides.tscn
+res://objects/Platformer/bouncepads/bouncepadup.tscn
+res://objects/Platformer/platformerTiles.tres
 res://testingscene.tscn

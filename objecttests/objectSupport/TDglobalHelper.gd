@@ -33,12 +33,12 @@ func remove_pickup(obj):pickups.erase(obj)
 #sets player
 func setPlayer(obj):player=obj
 
-func collide_objects(obj,player=false):
+func collide_objects(obj,isplayer=false):
 	var global_position =obj.global_position
 	for object in objects:
 		if object==obj:continue
 		var dist=(object.global_position-global_position).length_squared()
-		if(dist<=16384&&object.has_method("pickup")&&player):object.pickup(obj);continue
+		if(dist<=16384&&object.has_method("pickup")&&isplayer):object.pickup(obj);continue
 		if dist<=9216:
 			if(object.has_method("attack")):object.attack(obj)
 

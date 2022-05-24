@@ -12,20 +12,25 @@ signal bounced
 var bcheck=PhysicsShapeQueryParameters2D.new()
 func _ready():
 	if Engine.is_editor_hint():return
+	call_deferred("setup")
+func setup():
 	var shape = RectangleShape2D.new()
 	shape.extents=checkSize/2
 	bcheck.shape=shape
-	bcheck.collision_mask=2
-	bcheck.transform=transform
+	bcheck.transform=global_transform
+	bcheck.collision_mask=1
+	
 	addCollision()
 
 
 func _physics_process(_delta):
 	if Engine.is_editor_hint():return
+	
 	var check:=get_world_2d().direct_space_state.intersect_shape(bcheck)
 	if check:
 		for obj in check:
 			var this=obj.collider
+			
 			if !this.has_method("bounceOff"):continue
 			this.bounceOffFull(global_position,force,[left,right,up,down])
 			
@@ -40,4 +45,3 @@ func addCollision():
 	col.shape.extents=checkSize/2-Vector2(1,1)
 	c.add_child(col)
 	add_child(c)
-	c.position
